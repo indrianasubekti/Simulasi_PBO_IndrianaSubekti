@@ -1,34 +1,34 @@
 <?php
-// PendaftaranPrestasi.php
+// PendaftaranKedinasan.php
 require_once 'Pendaftaran.php';
 
-class PendaftaranPrestasi extends Pendaftaran {
+class PendaftaranKedinasan extends Pendaftaran {
     // Properti tambahan spesifik (private)
-    private $jenisPrestasi;
-    private $tingkatPrestasi;
+    private $skIkatanDinas;
+    private $instansiSponsor;
 
     // Konstruktor
-    public function __construct($id_pendaftaran, $nama_calon, $asal_sekolah, $nilai_ujian, $biayaPendaftaranDasar, $jenisPrestasi, $tingkatPrestasi) {
+    public function __construct($id_pendaftaran, $nama_calon, $asal_sekolah, $nilai_ujian, $biayaPendaftaranDasar, $skIkatanDinas, $instansiSponsor) {
         parent::__construct($id_pendaftaran, $nama_calon, $asal_sekolah, $nilai_ujian, $biayaPendaftaranDasar);
-        $this->jenisPrestasi = $jenisPrestasi;
-        $this->tingkatPrestasi = $tingkatPrestasi;
+        $this->skIkatanDinas = $skIkatanDinas;
+        $this->instansiSponsor = $instansiSponsor;
     }
 
     // --- GETTER & SETTER ---
-    public function getJenisPrestasi() {
-        return $this->jenisPrestasi;
+    public function getSkIkatanDinas() {
+        return $this->skIkatanDinas;
     }
 
-    public function setJenisPrestasi($jenisPrestasi) {
-        $this->jenisPrestasi = $jenisPrestasi;
+    public function setSkIkatanDinas($skIkatanDinas) {
+        $this->skIkatanDinas = $skIkatanDinas;
     }
 
-    public function getTingkatPrestasi() {
-        return $this->tingkatPrestasi;
+    public function getInstansiSponsor() {
+        return $this->instansiSponsor;
     }
 
-    public function setTingkatPrestasi($tingkatPrestasi) {
-        $this->tingkatPrestasi = $tingkatPrestasi;
+    public function setInstansiSponsor($instansiSponsor) {
+        $this->instansiSponsor = $instansiSponsor;
     }
 
     // --- IMPLEMENTASI METODE ABSTRAK (Wajib Hadir) ---
@@ -38,31 +38,31 @@ class PendaftaranPrestasi extends Pendaftaran {
     }
 
     public function tampilkanInfoJalur() {
-        return "Jalur Pendaftaran: Prestasi | Jenis: " . $this->jenisPrestasi . " | Tingkat: " . $this->tingkatPrestasi;
+        return "Jalur Pendaftaran: Kedinasan | No SK: " . $this->skIkatanDinas . " | Sponsor: " . $this->instansiSponsor;
     }
 
     // --- METODE QUERY SPESIFIK ---
-    public static function getDaftarPrestasi($db) {
-        $query = "SELECT id_pendaftaran, nama_calon, asal_sekolah, nilai_ujian, biaya_pendaftaran_dasar, jenis_prestasi, tingkat_prestasi 
+    public static function getDaftarKedinasan($db) {
+        $query = "SELECT id_pendaftaran, nama_calon, asal_sekolah, nilai_ujian, biaya_pendaftaran_dasar, sk_ikatan_dinas, instansi_sponsor 
                   FROM tabel_pendaftaran 
-                  WHERE jalur_pendaftaran = 'Prestasi'";
+                  WHERE jalur_pendaftaran = 'Kedinasan'";
         
         $stmt = $db->prepare($query);
         $stmt->execute();
         
-        $daftarPrestasi = [];
+        $daftarKedinasan = [];
         while ($row = $stmt->fetch()) {
-            $daftarPrestasi[] = new self(
+            $daftarKedinasan[] = new self(
                 $row->id_pendaftaran,
                 $row->nama_calon,
                 $row->asal_sekolah,
                 $row->nilai_ujian,
                 $row->biaya_pendaftaran_dasar,
-                $row->jenis_prestasi,
-                $row->tingkat_prestasi
+                $row->sk_ikatan_dinas,
+                $row->instansi_sponsor
             );
         }
-        return $daftarPrestasi;
+        return $daftarKedinasan;
     }
 }
 ?>
