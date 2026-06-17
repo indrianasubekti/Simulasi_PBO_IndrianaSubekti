@@ -31,12 +31,13 @@ class PendaftaranPrestasi extends Pendaftaran {
         $this->tingkatPrestasi = $tingkatPrestasi;
     }
 
-    // --- IMPLEMENTASI METODE ABSTRAK 
+    // --- OVERRIDING METODE ABSTRAK INDUK ---
     public function hitungTotalBiaya() {
-        // Logika detail perhitungan akan diisi pada Tahap 5
-        return $this->getBiayaPendaftaranDasar();
+        // Jalur Prestasi: Mendapat potongan/insentif apresiasi sebesar Rp50.000
+        $potongan = 50000;
+        return $this->getBiayaPendaftaranDasar() - $potongan;
     }
-
+    
     public function tampilkanInfoJalur() {
         return "Jalur Pendaftaran: Prestasi | Jenis: " . $this->jenisPrestasi . " | Tingkat: " . $this->tingkatPrestasi;
     }

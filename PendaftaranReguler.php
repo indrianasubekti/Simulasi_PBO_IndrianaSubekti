@@ -32,9 +32,9 @@ class PendaftaranReguler extends Pendaftaran {
         $this->lokasiKampus = $lokasiKampus;
     }
 
-    // --- IMPLEMENTASI METODE ABSTRAK (Wajib Hadir) ---
+    // --- OVERRIDING METODE ABSTRAK INDUK ---
     public function hitungTotalBiaya() {
-        // Logika detail perhitungan akan diisi pada Tahap 5
+        // Jalur Reguler: Tarif standar murni
         return $this->getBiayaPendaftaranDasar();
     }
 

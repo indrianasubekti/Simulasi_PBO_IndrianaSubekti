@@ -31,12 +31,12 @@ class PendaftaranKedinasan extends Pendaftaran {
         $this->instansiSponsor = $instansiSponsor;
     }
 
-    // --- IMPLEMENTASI METODE ABSTRAK (Wajib Hadir) ---
+    // --- OVERRIDING METODE ABSTRAK INDUK ---
     public function hitungTotalBiaya() {
-        // Logika detail perhitungan akan diisi pada Tahap 5
-        return $this->getBiayaPendaftaranDasar();
+        // Jalur Kedinasan: Dikenakan surcharge administrasi khusus sebesar 25% (dikali 1.25)
+        return $this->getBiayaPendaftaranDasar() * 1.25;
     }
-
+    
     public function tampilkanInfoJalur() {
         return "Jalur Pendaftaran: Kedinasan | No SK: " . $this->skIkatanDinas . " | Sponsor: " . $this->instansiSponsor;
     }
